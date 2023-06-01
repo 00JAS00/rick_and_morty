@@ -1,0 +1,22 @@
+.navBar{
+    display: flex;
+    justify-content: center;
+}
+nav{
+    display: inline;
+    padding: 0.3rem;
+}
+input{
+    background-color: rgb(39, 39, 39);
+    padding:0.4rem;
+    color: rgb(232, 130, 6);
+    border-radius: 15%;
+}
+input::placeholder{
+    color: rgba(151, 144, 144, 0.772);
+    padding: 1rem;
+}
+button{
+    background-color: rgb(232, 130, 6);
+}
+
