@@ -1,8 +1,5 @@
-.navBar{
-    display: flex;
-    justify-content: center;
-}
-nav{
+
+.addNav{
     display: inline;
     padding: 0.3rem;
 }

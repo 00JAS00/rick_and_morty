@@ -1,16 +1,31 @@
 import styles from'./App.module.css';
-import Cards from './components/Cards/Cards.jsx';
-import Nav from '../src/components/Nav/Nav';
 import { useState } from 'react';
 import  axios from 'axios';
+import {Routes,Route, useLocation} from 'react-router-dom'
+
+// Rutas de Componentes
+
+import Cards from './components/Cards/Cards.jsx';
+import Nav from '../src/components/Nav/Nav';
+import Detail from './components/Detail/Detail';
+import About from './components/About/About';
+import Form from './components/Form/Form';
 
 
 function App() {
    const [characters, setCharacters] = useState([]);
+   const location=useLocation();
+   const logInRoute=location.pathname==="/";
 
+   function onClose(id) {
+      let deleted = characters.filter((character) => character.id !== Number(id));
 
-   function onSearch(id) {
-      axios(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
+      setCharacters(deleted);
+   } 
+   const onSearch = (id) => {
+      axios(`https://rickandmortyapi.com/api/character/${id}`)
+      .then (response => response.data)
+      .then(( data ) => {
          if (data.name) {
             setCharacters((oldChars) => [...oldChars, data]);
          } else {
@@ -18,18 +33,17 @@ function App() {
          }
       });
    }
-
-
-   function onClose(id) {
-      let deleted = characters.filter((character) => character.id !== Number(id));
-
-      setCharacters(deleted);
-   } 
    return (
-      <div className={styles.app}>
-         <Nav onSearch={onSearch}/>
-         <Cards characters={characters} onClose={onClose} />
-      </div>
+      
+         <div className={styles.app}>
+            {!logInRoute&&<Nav onSearch={onSearch}/>}
+            <Routes>
+               <Route path='/' element={<Form/>}/>
+               <Route path='/Home' element={<Cards characters={characters} onClose={onClose} />}/>
+               <Route path='/About' element={<About/>}/>
+               <Route path='Detail/:id' element={<Detail/>}/>
+            </Routes>
+         </div>
    );
 }
 

@@ -3,7 +3,7 @@ import { useState } from "react";
 
 
 export default function SearchBar({onSearch}) {
-   const [id,setId]=useState("");
+   const [id,setId]=useState('');
    
    function handleChange(event){
       event.preventDefault()
@@ -11,11 +11,9 @@ export default function SearchBar({onSearch}) {
    }
 
    return (
-      <div className={style.navBar}>
-         <nav>
+         <div className={style.addNav}>
             <input type='search' onChange={handleChange} value={id}/>
-            <button onClick={()=>onSearch(id)}>Agregar</button>
-         </nav>
-      </div>
+            <button onClick={() => {onSearch(id); setId('')}}>Agregar</button>
+         </div>
    );
 }

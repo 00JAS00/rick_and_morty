@@ -1,8 +1,10 @@
+/* eslint-disable no-template-curly-in-string */
 import style from './Card.module.css'
+import { Link } from 'react-router-dom';
 
 export default function Card(props) {
    let {characters,onClose}=props
-   let {name,status,species,gender,image}=characters
+   let {name,status,species,gender,image,id}=characters
       return (
          <div className={style.flip_card_container}>
   <div className={style.flip_card}>
@@ -27,6 +29,7 @@ export default function Card(props) {
           <img src="https://w0.peakpx.com/wallpaper/244/435/HD-wallpaper-portal-morty-rick-thumbnail.jpg" alt=""/>
         </figure>
         <button onClick={()=>{onClose(characters.id)}}>Cerrar</button>
+        <button><Link to={`/detail/${id}`}>Detalles</Link></button>  
 
         <div className={style.design_container}>
 
@@ -36,7 +39,7 @@ export default function Card(props) {
     </div>
 </div>
       );
-   }
-   
+    }
 
 
+    
