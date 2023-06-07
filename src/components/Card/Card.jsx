@@ -1,45 +1,64 @@
-/* eslint-disable no-template-curly-in-string */
-import style from './Card.module.css'
+
+// import style from './Card.module.css'
+// Redux
 import { Link } from 'react-router-dom';
+import  {connect} from 'react-redux';
+import {addFav,removeFav} from '//src/redux/actions/actions.js'
+// React
+import { useState } from 'react';
 
-export default function Card(props) {
-   let {characters,onClose}=props
+const Card=(props)=>{
+  // Estados
+   let {characters,onClose,addFavorite,removeFavorite}=props
    let {name,status,species,gender,image,id}=characters
-      return (
-         <div className={style.flip_card_container}>
-  <div className={style.flip_card}>
+   const [isFav,setFav]=useState(false)
 
-      <div className={style.card_front}>
-        <figure>
-          <div className={style.img_bg}></div>
-          <img src={image} alt={name}/>
-          <figcaption>{name}</figcaption>
-        </figure>
-
-        <ul>
-              <li>Estado: {status}</li>
-              <li>Especie: {species}</li>
-              <li>Genero: {gender}</li>
-        </ul>
-      </div>
-
-      <div className={style.card_back}>
-        <figure>
-          <div className={style.img_bg}></div>
-          <img src="https://w0.peakpx.com/wallpaper/244/435/HD-wallpaper-portal-morty-rick-thumbnail.jpg" alt=""/>
-        </figure>
-        <button onClick={()=>{onClose(characters.id)}}>Cerrar</button>
-        <button><Link to={`/detail/${id}`}>Detalles</Link></button>  
-
-        <div className={style.design_container}>
-
-        </div>
-      </div>
-
-    </div>
-</div>
-      );
+// Handles
+  const handleFavorite=(character)=>{
+    if (!isFav) {
+      setFav(true)
+      addFavorite(character)
+      
+    }else{
+      removeFavorite(id)
+      setFav(true)
     }
+  }
+
+  // Render Cardw
+  return (
+        <div>
+                {
+                  isFav ? (<button onClick={handleFavorite}>❤️</button>) : (<button onClick={handleFavorite}>🤍</button>)
+                }
+                <img src={image} alt={name}/>
+                <ul>
+                      <li>{name}</li>
+                      <li>Estado: {status}</li>
+                      <li>Especie: {species}</li>
+                      <li>Genero: {gender}</li>
+                </ul>
+                <button onClick={()=>{onClose(characters.id)}}>Cerrar</button>
+                <button><Link to={`/detail/${id}`}>Detalles</Link></button>  
+        </div>
+        );
+}
+
+const mapDispachToProps=(dispatch)=>{
+  return{
+    addFavorite:(character)=>dispatch(addFav(character)),
+    removeFavorite:(id)=>dispatch(removeFav(id))
+  }
+}
+const mapStateToProps=(state)=>{
+  return{
+    myFavorites:state.myFavorites
+  }
+}
+export default connect(
+  mapStateToProps,
+  mapDispachToProps
+)(Card)
 
 
     

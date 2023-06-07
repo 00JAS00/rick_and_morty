@@ -1,7 +1,0 @@
-.Conteiner_Cards{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    max-width: 100%;
-    margin: 2rem;
-}

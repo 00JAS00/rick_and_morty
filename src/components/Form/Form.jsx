@@ -2,53 +2,50 @@ import React, { useState } from "react";
 import validate from "../validate";
 
 const Form=({login})=>{
+    const [user, setUser] = useState({
+        email: "",
+        password: "",
+      });
     
-    // Estadoss
-
-    const {userData,setUserData}=useState({
-        email:"",
-        password:"",
-    });
-    const {error,setError}=useState({
-        email:"",
-        password:"",
-    })
-
-
-    // Handles
-
-
-    const handleChange=(e)=>{
-        setUserData({
-            ...userData,
-            [e.target.name]:e.target.value,
+      const [errors, setErrors] = useState({
+        email: " ",
+        password: " ",
+      });
+    
+      function handleChange(event) {
+        event.preventDefault();
+        setUser({
+          ...user,
+          [event.target.name]: event.target.value,
         });
-        setError(validate({
-            ...userData,
-            [e.target.name]:e.target.value,
-        }));
-    };
-    function handleSubmit(e){
-        e.preventDefault(userData)
-        if(!errors.email&&!errors.password){
-            login(userData);
+        setErrors(
+          validate({
+            ...user,
+            [event.target.name]: event.target.value,
+          })
+        );
+      }
+    
+    function handleSubmit(e) {
+        e.preventDefault();
+    
+        if (!errors.email && !errors.password) {
+        login(user);
+        } else {
+        alert("Datos incorrectos");
         }
-        else{
-            alert("incorrect data")
-        }
-
     }
 
     return(
         <div>
             <h1>login</h1>
-            <form >
+            <form onSubmit={handleSubmit}>
             <label htmlFor="email"></label>
-            <input type="email" name="email" value={userData.email} onChange={handleChange} />
-            {error.email&& <span>{error.email}</span>}
+            <input type="email" name="email" value={user.email} onChange={handleChange} />
+            {errors.email ? <span>{errors.email}</span> : null}
             <label htmlFor="password"></label>
-            <input type="password" name="password" value={userData.password} onChange={handleChange}/>
-            {error.password&& <span>{error.password}</span>}
+            <input type="password" name="password" value={user.password} onChange={handleChange}/>
+            {errors.password ? <span>{errors.password}</span> : null}
             <button>Submit</button>
         </form>
         </div>
