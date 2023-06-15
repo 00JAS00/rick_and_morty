@@ -10,7 +10,7 @@ const getCharById=(res,id)=>{
             id,
             gender,
             species,
-            origin:origin.name,
+            origin,
             image,
             status
         }
