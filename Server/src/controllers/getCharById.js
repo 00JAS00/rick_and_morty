@@ -1,7 +1,7 @@
 const axios=require('axios')
 const getCharById=(res,id)=>{
     axios
-    .get(`https://rickandmortyapi.com/api/character/:${id}`)
+    .get(`https://rickandmortyapi.com/api/character/${id}`)
     .then(
         (response)=> response.data,
     )
@@ -21,7 +21,7 @@ const getCharById=(res,id)=>{
 
 .catch((error)=>{
     return res.writeHead(500,{"Content-type":"text/plain"})
-            .end(error.message)
+            .end(error.message+" falla en controllers")
 })
 
 }
