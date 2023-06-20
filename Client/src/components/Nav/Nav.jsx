@@ -6,13 +6,15 @@ const Nav = ({onSearch, randomHandler}) => {
   return (
     <nav>
       <button>
-        <Link to='/About'>About</Link>
+        <Link to="/About">About</Link>
       </button>
       <button>
-        <Link to='/home'>Home</Link>
+        <Link to="/home">Home</Link>
       </button>
-      <button><Link to='/favorites'>Favorites</Link></button>
-      <SearchBar onSearch={onSearch} randomHandler={randomHandler}/>
+      <button>
+        <Link to="/favorites">Favorites</Link>
+      </button>
+      <SearchBar onSearch={onSearch} randomHandler={randomHandler} />
     </nav>
   );
 };

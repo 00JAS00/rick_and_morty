@@ -11,7 +11,7 @@ import About from './views/About/About';
 import Form from './components/Form/Form';
 import Favorites from './views/Favorites/Favorites';
 
-const App=()=>{
+const App = () => {
   const [characters, setCharacters] = useState([]);
   const location = useLocation();
 
@@ -20,7 +20,7 @@ const App=()=>{
   const EMAIL = 'julian.m.sosa.muchut@gmail.com';
   const PASSWORD = '123julian';
 
-  const login=(userData)=>{
+  const login = (userData) => {
     if (userData.password === PASSWORD && userData.email === EMAIL) {
       setAccess(true);
       navigate('/home');
@@ -31,7 +31,7 @@ const App=()=>{
     !access && navigate('/');
   }, [access]);
 
-  const onSearch=(id)=>{
+  const onSearch = (id) => {
     axios(`https://rickandmortyapi.com/api/character/${id}`).then(
         ({data}) => {
           if (data.name) {
@@ -42,15 +42,15 @@ const App=()=>{
         },
     );
   };
-  const onClose=(id)=> {
+  const onClose = (id) => {
     const deleted = characters.filter(
-        (character) =>character.id!==Number(id),
+        (character) => character.id !== Number(id),
     );
 
     setCharacters(deleted);
   };
 
-  const randomHandler=()=>{
+  const randomHandler = () => {
     const haveIt = [];
     let random = (Math.random() * 826).toFixed();
     random = Number(random);
@@ -79,15 +79,12 @@ const App=()=>{
         <Route path="/" element={<Form login={login} />} />
         <Route
           path="/Home"
-          element={<Cards
-            characters={characters}
-            onClose={onClose}
-          />}
+          element={<Cards characters={characters} onClose={onClose} />}
         />
 
         <Route path="/About" element={<About />} />
         <Route path="Detail/:id" element={<Detail />} />
-        <Route path='/favorites' element={<Favorites />}/>
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
     </div>
   );
