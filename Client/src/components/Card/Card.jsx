@@ -10,9 +10,13 @@ import {useState, useEffect} from 'react';
 
 const Card=({character, onClose, addFavorite, removeFavorite, myFavorites})=>{
   // Estados
+
   const {name, status, species, gender, image, id}=character;
   const [isFav, setFav]=useState(false);
+  const [closeBtn, setCloseBtn]=useState(true);
+
   // useEffect remember favorite
+
   useEffect(() => {
     myFavorites.forEach((fav) => {
       if (fav.id === id) {
@@ -20,8 +24,14 @@ const Card=({character, onClose, addFavorite, removeFavorite, myFavorites})=>{
       }
     });
   }, [myFavorites]);
+  useEffect(()=>{
+    if (!onClose) {
+      setCloseBtn(false);
+    }
+  }, []);
 
   // Handles
+
   const handleFavorite=()=>{
     if (!isFav) {
       setFav(true);
@@ -36,17 +46,20 @@ const Card=({character, onClose, addFavorite, removeFavorite, myFavorites})=>{
   // Render Card
   return (
     <div>
-		  <button onClick={handleFavorite}>{isFav?'❤️':'🤍'}</button>
-	    <img src={image} alt={name}/>
-	    <ul>
+      <button onClick={handleFavorite}>{isFav?'❤️':'🤍'}</button>
+      <img src={image} alt={name}/>
+      <ul>
         <li>{name}</li>
         <li>Estado: {status}</li>
         <li>Especie: {species}</li>
         <li>Genero: {gender}</li>
       </ul>
-      <button onClick={()=>{
-        onClose(id);
-      }}>Cerrar</button>
+      {closeBtn&&
+        <button
+          onClick={()=>{
+            onClose(id);
+          }}>Cerrar</button>
+      }
       <button><Link to={`/detail/${id}`}>Detalles</Link></button>
     </div>
   );

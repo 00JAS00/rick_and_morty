@@ -1,10 +1,9 @@
 const axios=require('axios')
-const getCharById=(res,id)=>{
-    axios
-    .get(`https://rickandmortyapi.com/api/character/${id}`)
-    .then(
-        (response)=> response.data,
-    )
+const URL='https://rickandmortyapi.com/api/character/';
+const getCharById=(req,res)=>{
+    const {id}=req.params
+    axios(URL+id)
+    .then((response)=> response.data)
     .then(({id,gender,species,origin,image,status})=>{
         const character={
             id,
@@ -14,15 +13,11 @@ const getCharById=(res,id)=>{
             image,
             status
         }
-        return res
-                    .writeHead(200,{"Content-type":"application/json"})
-                    .end(JSON.stringify(character))
+        return character.name? res.status(200).json(character): res.status(404).send("Not funcaaaaaaaaaa");
     })
-
-.catch((error)=>{
-    return res.writeHead(500,{"Content-type":"text/plain"})
-            .end(error.message+" falla en controllers")
-})
+    .catch((error)=>{
+        res.status(500).json({message: error.message+'puto'})
+    })
 
 }
 

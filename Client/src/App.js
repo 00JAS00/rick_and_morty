@@ -2,6 +2,8 @@ import styles from './App.module.css';
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {Routes, Route, useLocation, useNavigate} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
+import {removeFav} from './redux/actions/actions';
 
 // Rutas de Componentes
 import Cards from './components/Cards/Cards.jsx';
@@ -12,19 +14,22 @@ import Form from './components/Form/Form';
 import Favorites from './views/Favorites/Favorites';
 
 const App = () => {
+  // States
   const [characters, setCharacters] = useState([]);
-  const location = useLocation();
-
-  const navigate = useNavigate();
   const [access, setAccess] = useState(true);
-  const EMAIL = 'julian.m.sosa.muchut@gmail.com';
-  const PASSWORD = '123julian';
+  const dispatch=useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
+  // Functions
 
-  const login = (userData) => {
-    if (userData.password === PASSWORD && userData.email === EMAIL) {
-      setAccess(true);
-      navigate('/home');
-    }
+  const login=(userData)=>{
+    const {email, password} = userData;
+    const URL = 'http://localhost:3001/rickandmorty/login/';
+    axios(URL + `?email=${email}&password=${password}`).then(({data}) => {
+      const {access} = data;
+      setAccess(data);
+      access && navigate('/home');
+    });
   };
 
   useEffect(() => {
@@ -42,12 +47,15 @@ const App = () => {
         },
     );
   };
+
+  // Handlers
+
   const onClose = (id) => {
     const deleted = characters.filter(
         (character) => character.id !== Number(id),
     );
-
     setCharacters(deleted);
+    dispatch(removeFav(id));
   };
 
   const randomHandler = () => {
@@ -70,6 +78,8 @@ const App = () => {
       return false;
     }
   };
+
+
   return (
     <div className={styles.app}>
       {location.pathname !== '/' && (
