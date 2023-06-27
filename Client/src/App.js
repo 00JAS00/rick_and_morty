@@ -16,7 +16,7 @@ import Favorites from './views/Favorites/Favorites';
 const App = () => {
   // States
   const [characters, setCharacters] = useState([]);
-  const [access, setAccess] = useState(true);
+  const [access, setAccess] = useState(false);
   const dispatch=useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const App = () => {
 
   const login=(userData)=>{
     const {email, password} = userData;
-    const URL = 'http://localhost:3001/rickandmorty/login/';
+    const URL = 'http://localhost:3001/rickandmorty/login';
     axios(URL + `?email=${email}&password=${password}`).then(({data}) => {
       const {access} = data;
       setAccess(data);
@@ -37,7 +37,7 @@ const App = () => {
   }, [access]);
 
   const onSearch = (id) => {
-    axios(`https://rickandmortyapi.com/api/character/${id}`).then(
+    axios(`http://localhost:3001/rickandmorty/character/${id}`).then(
         ({data}) => {
           if (data.name) {
             setCharacters((characters) => [...characters, data]);
@@ -65,7 +65,7 @@ const App = () => {
 
     if (!haveIt.includes(random)) {
       haveIt.push(random);
-      fetch(`https://rickandmortyapi.com/api/character/${random}`)
+      fetch(`http://localhost:3001/rickandmorty/character/${random}`)
           .then((response) => response.json())
           .then((data) => {
             if (data.name) {
