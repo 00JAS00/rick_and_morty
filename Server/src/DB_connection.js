@@ -5,8 +5,6 @@ const FavoriteModel=require('./models/FavoriteModel');
 const UserModel=require('./models/UserModel');
 
 
-
-
 const sequelize = new Sequelize(
    // URL
    `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,

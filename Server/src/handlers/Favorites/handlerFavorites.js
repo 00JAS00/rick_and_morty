@@ -1,4 +1,4 @@
-const {postFav,deleteFav}=require('../controllers/postAndDeleteFav')
+const {postFav,deleteFav}=require('../../controllers/Favorites/postAndDeleteFav')
 
 
 

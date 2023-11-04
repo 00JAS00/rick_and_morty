@@ -30,6 +30,10 @@ module.exports = (sequelize) => {
       image:{
          type:DataTypes.STRING,
          allowNull: false
+      },
+      delete:{
+         type:DataTypes.BOOLEAN,
+         defaultValue: true,
       }
    }, 
    { timestamps: false });

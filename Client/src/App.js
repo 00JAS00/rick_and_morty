@@ -92,7 +92,7 @@ const App = () => {
           element={<Cards characters={characters} onClose={onClose} />}
         />
 
-        <Route path="/About" element={<About />} />
+        <Route path="/About" element={<About />}/>
         <Route path="Detail/:id" element={<Detail />} />
         <Route path="/favorites" element={<Favorites />} />
       </Routes>
