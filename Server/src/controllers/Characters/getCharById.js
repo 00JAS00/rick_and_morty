@@ -16,4 +16,4 @@ const getCharById= async(id)=>{
         return character;
 }
 
-module.exports=getCharById
+module.exports= getCharById

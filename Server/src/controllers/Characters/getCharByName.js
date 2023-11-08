@@ -1,4 +1,4 @@
-const getAllCharacters=require('../controllers/Characters/getAllCharacters')
+const  getAllCharacters = require('./getAllCharacters')
 
 const getCharByName=async(name)=>{
     const characters= await getAllCharacters();
@@ -12,4 +12,4 @@ const getCharByName=async(name)=>{
     
 }
 
-modules.exports=getCharByName
+module.exports = getCharByName

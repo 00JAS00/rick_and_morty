@@ -19,9 +19,6 @@ const loginPostHandler=(req,res)=>{
         res.status(404).json({error:error.message})
     };
 }
-const 
-
-
 
 
 module.exports={loginHandler, loginPostHandler}

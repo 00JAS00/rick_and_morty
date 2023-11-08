@@ -1,6 +1,6 @@
-const getCharById=require('../../controllers/Characters/getCharById')
-const getAllCharacters=require('../../controllers/Characters/getAllCharacters')
-const getCharByName=require('../../controllers/Characters/getCharByName')
+const getCharById = require('../../controllers/Characters/getCharById')
+const getAllCharacters = require('../../controllers/Characters/getAllCharacters')
+const getCharByName = require('../../controllers/Characters/getCharByName')
 
 const getAllCharactersHandler=async(req,res)=>{
     try {
