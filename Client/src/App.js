@@ -3,7 +3,7 @@ import axios from 'axios';
 import {Routes, Route, useLocation, useNavigate} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {removeFav} from './redux/actions/actions';
-
+import styles from './styles/App.scss';
 // Rutas de Componentes
 import Cards from './components/Cards/Cards.jsx';
 import Nav from '../src/components/Nav/Nav';

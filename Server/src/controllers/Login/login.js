@@ -1,4 +1,4 @@
-const userModel=require('../../DB_connection')
+const { User }=require('../../DB_connection')
 const login=(email,password)=>{
     
     const found=data.find(user=>user.email===email && user.password===password)

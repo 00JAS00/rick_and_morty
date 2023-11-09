@@ -1,4 +1,3 @@
-import style from './SearchBar.module.css';
 import React, {useState} from 'react';
 
 const SearchBar = ({onSearch, randomHandler}) => {

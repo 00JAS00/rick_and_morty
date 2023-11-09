@@ -1,7 +1,7 @@
-/* eslint-disable react/react-in-jsx-scope */
 import axios from 'axios';
 import {useParams} from 'react-router-dom';
 import {useState, useEffect} from 'react';
+import '../../styles/views/_Detail.scss';
 const Detail = () => {
   const {id} = useParams();
   const [character, setCharacter] = useState([]);
