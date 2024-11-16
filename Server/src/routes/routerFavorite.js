@@ -1,9 +1,12 @@
 const routerFavorite=require('express').Router()
-const {handlerGetFav, handlerGetFavById, handlerPostFav,handlerDeleteFav}=require('../handlers/Favorites/handlerFavorites')
+const { Router } = require('express');
+const {handlerGetFav, handlerGetFavById, handlerPostFav,handlerDeleteFav,handlerUpdateFav}=require('../handlers/Favorites/handlerFavorites')
 
-// routerFavorite.get("/",handlerGetFav); 
-// routerFavorite.get("/:id",handlerGetFavById);     
+routerFavorite.get("/",handlerGetFav); 
+routerFavorite.get("/:id",handlerGetFavById);    
 routerFavorite.post("/",handlerPostFav);
-// routerFavorite.put("/:id",handlerPutFav);
+routerFavorite.put("/delete/:id",handlerDeleteFav);
+routerFavorite.put("/update/:id",handlerUpdateFav);
+
 
 module.exports=routerFavorite

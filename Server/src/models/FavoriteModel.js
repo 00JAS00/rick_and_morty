@@ -33,7 +33,7 @@ module.exports = (sequelize) => {
       },
       delete:{
          type:DataTypes.BOOLEAN,
-         defaultValue: true,
+         defaultValue: false,
       }
    }, 
    { timestamps: false });

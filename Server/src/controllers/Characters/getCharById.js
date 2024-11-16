@@ -1,5 +1,6 @@
 const axios=require('axios')
 const URL='https://rickandmortyapi.com/api/character';
+
 const getCharById= async(id)=>{
         const response = await axios.get(`${URL}/${id}`);
         const data = response.data;
